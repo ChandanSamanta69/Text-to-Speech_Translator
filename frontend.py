@@ -376,6 +376,16 @@ textarea:focus,
 .char-count-warn { color: var(--yellow-bright) !important; }
 .char-count-over { color: var(--red-bright)    !important; }
  
+/* ─── DISABLED TEXTAREA (output box) — bright text ─── */
+textarea:disabled,
+[data-testid="stTextArea"] textarea:disabled {
+  color: #ffffff !important;
+  -webkit-text-fill-color: #ffffff !important;
+  opacity: 1 !important;
+  background: var(--surface-2) !important;
+  border: 1.5px solid rgba(124,58,237,0.35) !important;
+}
+ 
 /* ─── MISC ─── */
 hr { border-color: var(--border) !important; margin: 24px 0 !important; }
 audio {
