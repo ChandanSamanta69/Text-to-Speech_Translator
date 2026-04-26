@@ -328,6 +328,75 @@ audio {
     background: linear-gradient(90deg, #8b5cf6, #ec4899, #f97316) !important;
     box-shadow: 0 6px 20px rgba(139,92,246,0.4) !important;
     font-size: 1.05rem !important;
+    color: #ffffff !important;
+    -webkit-text-fill-color: #ffffff !important;
+}
+ 
+/* Default secondary buttons (Swap and any other) */
+.stButton > button[kind="secondary"] {
+    background: linear-gradient(90deg, #1e3a8a, #3b82f6) !important;
+    color: #ffffff !important;
+    -webkit-text-fill-color: #ffffff !important;
+}
+ 
+/* Action row (4 columns) — Speak, Copy, Clear */
+/* Position 2 — Speak (green → cyan) */
+[data-testid="stHorizontalBlock"]:has(> div:nth-child(4)) > div:nth-child(2) button {
+    background: linear-gradient(90deg, #22c55e, #06b6d4) !important;
+    color: #ffffff !important;
+    -webkit-text-fill-color: #ffffff !important;
+    font-weight: 800 !important;
+    text-shadow: 0 1px 2px rgba(0,0,0,0.3) !important;
+    box-shadow: 0 4px 14px rgba(34,197,94,0.35) !important;
+}
+ 
+/* Position 3 — Copy (yellow → orange, dark text for visibility) */
+[data-testid="stHorizontalBlock"]:has(> div:nth-child(4)) > div:nth-child(3) button {
+    background: linear-gradient(90deg, #fbbf24, #f97316) !important;
+    color: #1a0a00 !important;
+    -webkit-text-fill-color: #1a0a00 !important;
+    font-weight: 900 !important;
+    box-shadow: 0 4px 14px rgba(251,191,36,0.4) !important;
+}
+ 
+/* Position 4 — Clear (red → pink) */
+[data-testid="stHorizontalBlock"]:has(> div:nth-child(4)) > div:nth-child(4) button {
+    background: linear-gradient(90deg, #ef4444, #ec4899) !important;
+    color: #ffffff !important;
+    -webkit-text-fill-color: #ffffff !important;
+    font-weight: 800 !important;
+    text-shadow: 0 1px 2px rgba(0,0,0,0.3) !important;
+    box-shadow: 0 4px 14px rgba(239,68,68,0.35) !important;
+}
+ 
+/* Make sure button text labels stay visible inside Streamlit's nested divs */
+.stButton > button p,
+.stButton > button div,
+.stButton > button span {
+    color: inherit !important;
+    -webkit-text-fill-color: inherit !important;
+}
+ 
+/* ---------- OUTPUT BOX (custom styled markdown) ---------- */
+.lf-output-box {
+    background: rgba(20,15,40,0.92);
+    border: 1px solid rgba(167,139,250,0.55);
+    border-radius: 12px;
+    padding: 14px 16px;
+    min-height: 220px;
+    color: #ffffff;
+    font-size: 1.02rem;
+    font-weight: 500;
+    white-space: pre-wrap;
+    word-wrap: break-word;
+    line-height: 1.55;
+    font-family: 'Inter', sans-serif;
+    box-shadow: inset 0 0 18px rgba(139,92,246,0.08);
+}
+.lf-output-placeholder {
+    color: #8a8aa8;
+    font-style: italic;
+    font-weight: 400;
 }
 </style>
 """,
@@ -468,15 +537,24 @@ with col_out:
         '<div class="lf-label lf-label-green"><span class="lf-dot lf-dot-green"></span>🌍 Translation</div>',
         unsafe_allow_html=True,
     )
-    st.text_area(
-        "Output",
-        value=st.session_state.translated_text,
-        height=220,
-        key="output_area",
-        label_visibility="collapsed",
-        disabled=True,
-    )
-    st.caption(f"📊 {len(st.session_state.translated_text)} characters")
+    # Reliable display via styled markdown box (avoids text_area state caching bug)
+    out_text = st.session_state.translated_text or ""
+    if out_text:
+        # Escape HTML special chars but preserve line breaks
+        safe = (out_text.replace("&", "&amp;")
+                       .replace("<", "&lt;")
+                       .replace(">", "&gt;"))
+        st.markdown(
+            f'<div class="lf-output-box">{safe}</div>',
+            unsafe_allow_html=True,
+        )
+    else:
+        st.markdown(
+            '<div class="lf-output-box"><span class="lf-output-placeholder">'
+            'Your translation will appear here…</span></div>',
+            unsafe_allow_html=True,
+        )
+    st.caption(f"📊 {len(out_text)} characters")
     st.markdown("</div>", unsafe_allow_html=True)
  
 # ----------------------------------------------------------------------
