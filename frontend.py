@@ -116,6 +116,11 @@ st.set_page_config(
     page_icon="🌐",
     layout="wide",
     initial_sidebar_state="collapsed",
+    menu_items={
+        "Get Help": None,
+        "Report a bug": None,
+        "About": None,
+    },
 )
  
 # ----------------------------------------------------------------------
@@ -125,6 +130,31 @@ st.markdown(
     """
 <style>
 @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700;800;900&family=Space+Grotesk:wght@500;700&display=swap');
+ 
+/* ---------- HIDE STREAMLIT CLOUD GITHUB / FORK / MENU / BADGE ---------- */
+/* Hide GitHub icon + Fork button (top-right toolbar on Streamlit Cloud) */
+[data-testid="stToolbar"]        {display: none !important;}
+[data-testid="stToolbarActions"] {display: none !important;}
+.stAppDeployButton               {display: none !important;}
+.stActionButton                  {display: none !important;}
+.stAppToolbar                    {display: none !important;}
+ 
+/* Hide the three-dot hamburger menu */
+#MainMenu                        {visibility: hidden !important; display: none !important;}
+ 
+/* Hide default Streamlit header & footer ("Made with Streamlit") */
+header                           {visibility: hidden !important;}
+footer                           {visibility: hidden !important;}
+ 
+/* Hide the "Hosted with Streamlit" / GitHub profile badge in bottom-right */
+.viewerBadge_container__1QSob    {display: none !important;}
+.viewerBadge_link__1S137         {display: none !important;}
+.viewerBadge_text__1JaDK         {display: none !important;}
+._profileContainer_gzau3_53      {display: none !important;}
+._link_gzau3_10                  {display: none !important;}
+._container_gzau3_1              {display: none !important;}
+[class*="viewerBadge"]           {display: none !important;}
+[class*="profileContainer"]      {display: none !important;}
  
 /* ---------- BASE ---------- */
 .stApp {
