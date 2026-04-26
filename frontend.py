@@ -226,14 +226,59 @@ header[data-testid="stHeader"] {background: transparent;}
     border-radius: 12px !important;
     color: #ffffff !important;
 }
+/* Selected value visible */
+.stSelectbox div[data-baseweb="select"] > div {
+    color: #ffffff !important;
+}
+.stSelectbox div[data-baseweb="select"] span {
+    color: #ffffff !important;
+}
+.stSelectbox input {
+    color: #ffffff !important;
+    -webkit-text-fill-color: #ffffff !important;
+}
+ 
+/* Dropdown popover (the list when you click the selectbox) */
+div[data-baseweb="popover"] {
+    background: #15152a !important;
+}
+div[data-baseweb="popover"] ul {
+    background: #15152a !important;
+    border: 1px solid rgba(139,92,246,0.4) !important;
+    border-radius: 12px !important;
+}
+div[data-baseweb="popover"] li {
+    background: #15152a !important;
+    color: #ffffff !important;
+}
+div[data-baseweb="popover"] li:hover {
+    background: rgba(139,92,246,0.25) !important;
+    color: #ffffff !important;
+}
+div[data-baseweb="popover"] li[aria-selected="true"] {
+    background: rgba(139,92,246,0.4) !important;
+    color: #ffffff !important;
+}
+div[data-baseweb="popover"] * {
+    color: #ffffff !important;
+}
+ 
+/* Text inputs / areas */
 .stTextArea textarea {
     background: rgba(15,15,30,0.85) !important;
     border: 1px solid rgba(139,92,246,0.3) !important;
     border-radius: 12px !important;
     color: #ffffff !important;
+    -webkit-text-fill-color: #ffffff !important;
     font-size: 1rem !important;
+    caret-color: #a78bfa !important;
 }
-/* Bright output text */
+.stTextArea textarea::placeholder {
+    color: #a0a0c0 !important;
+    opacity: 1 !important;
+}
+ 
+/* Bright output text (disabled textarea) */
 .stTextArea textarea[disabled] {
     color: #ffffff !important;
     -webkit-text-fill-color: #ffffff !important;
@@ -241,6 +286,30 @@ header[data-testid="stHeader"] {background: transparent;}
     background: rgba(20,15,40,0.9) !important;
     border: 1px solid rgba(167,139,250,0.5) !important;
     font-weight: 500 !important;
+}
+ 
+/* Captions and small text */
+.stCaption, .stMarkdown p, [data-testid="stCaptionContainer"] {
+    color: #c0c0d8 !important;
+}
+ 
+/* Alert / info / warning / error boxes — make text bright */
+.stAlert {
+    color: #ffffff !important;
+}
+.stAlert p, .stAlert div {
+    color: #ffffff !important;
+}
+ 
+/* st.code block — bright text */
+.stCode, pre code {
+    color: #ffffff !important;
+    background: rgba(15,15,30,0.95) !important;
+}
+ 
+/* Audio player label */
+audio {
+    filter: invert(0.9);
 }
  
 /* ---------- BUTTONS ---------- */
